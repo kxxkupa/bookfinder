@@ -1,0 +1,69 @@
+{% extends "base_book.html" %}
+{% block title %}글쓰기{% endblock %}
+{% block content %}
+<div id="container" class="board write">
+    <form action="{{ url_for('book.board_write', userId=g.user.userId) }}" method="post" autocomplete="off" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <table class="board_write">
+            <caption>글쓰기</caption>
+            <colgroup>
+                <col style="width: 150px">
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="th">
+                        <p>책 제목</p>
+                    </td>
+                    <td class="td">
+                        {{ form.booktitle(id="book_title", placeholder="책 제목을 입력해주세요") }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>책 이미지</p>
+                    </td>
+                    <td class="td">
+                        <div class="upload_file">
+                            <label for="book_image">첨부파일</label>
+                            <input class="upload_name" placeholder="도서 이미지를 업로드 해주세요">
+                            {{ form.bookimage(id="book_image") }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>평점</p>
+                    </td>
+                    <td class="td">
+                        {{ form.bookrating(class="rating_radio") }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>후기</p>
+                    </td>
+                    <td class="td">
+                        {{ form.bookcontent(id="book_content", placeholder="책을 읽고 난 후기를 입력해 주세요") }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="btn_wrap">
+            <div class="btn_box type_02">
+                {{ form.submit(id="btn_save") }}
+                <a href="{{ url_for('book.index', userId=g.user.userId) }}">취소</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    // 파일 업로드
+    $("#book_image").on('change',function(){
+        var file_path = $("#book_image").val();
+        var file_name = file_path.split("\\").pop();
+
+        $(".upload_name").val(file_name);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base_login.html" %}
+{% block title %}로그인{% endblock %}
+{% block content %}
+<div id="form" class="login">
+    <form action="{{ url_for('auth.login') }}" method="post" autocomplete="off">
+        {{ form.csrf_token }}
+        <h1 class="title">로그인</h1>
+        <div class="input_wrap">
+            <div class="input_box">
+                <label for="login_id">아이디</label>
+                {{ form.id(id="login_id") }}
+            </div>
+            <div class="input_box">
+                <label for="login_password">비밀번호</label>
+                {{ form.password(id="login_password") }}
+            </div>
+        </div>
+        <div class="btn_box type_02">
+            {{ form.submit(id="btn_login") }}
+            <a href="{{ url_for('auth.create_user') }}">회원가입</button>
+        </div>
+    </form>
+</div>
+<script>
+    if($("#login_id").val() != 0){
+        $("#login_id").siblings().addClass("on");
+    }
+</script>
+{% endblock %}

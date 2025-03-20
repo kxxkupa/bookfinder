@@ -1,0 +1,94 @@
+{% extends "base_book.html" %}
+{% block title %}게시물 수정{% endblock %}
+{% block content %}
+<div id="container" class="board write">
+    <form action="{{ url_for('book.board_update', userId=g.user.userId, boardId=boardId) }}" method="post" autocomplete="off" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <table class="board_write">
+            <caption>글쓰기</caption>
+            <colgroup>
+                <col style="width: 150px">
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="th">
+                        <p>책 제목</p>
+                    </td>
+                    <td class="td">
+                        {{ form.booktitle(id="book_title", placeholder="책 제목을 입력해주세요", value=board.boardTitle) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>책 이미지</p>
+                    </td>
+                    <td class="td">
+                        <div class="upload_file">                            
+                            <label for="book_image">첨부파일</label>
+                            <input class="upload_name" placeholder="도서 이미지를 업로드 해주세요" value="{{ board.boardImage }}">
+                            <button type="button" class="file_del">삭제</button>
+                            {{ form.bookimage(id="book_image") }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>평점</p>
+                    </td>
+                    <td class="td">
+                        {{ form.bookrating(class="rating_radio", value=board.boardRating) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th">
+                        <p>후기</p>
+                    </td>
+                    <td class="td">
+                        {{ form.bookcontent(id="book_content", placeholder="책을 읽고 난 후기를 입력해 주세요", value=board.boardContent) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="btn_wrap">
+            <div class="btn_box type_02">
+                {{ form.submit(id="btn_save") }}
+                <a href="{{ url_for('book.board_view', userId=g.user.userId, boardId=boardId) }}">취소</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    // 파일 업로드
+    $("#book_image").on('change',function(){
+        var file_path = $("#book_image").val();
+        var file_name = file_path.split("\\").pop();
+
+        $(".upload_name").val(file_name);
+    });
+
+    // 파일 삭제
+    $(".file_del").on('click', function(){
+        $("#book_image, .upload_name").val("");
+    });
+
+    $(function(){
+        // 데이터 불러오기
+        // 1. 도서 이미지 파일
+        var file_path = $(".upload_name").val();
+        var file_name = file_path.split("\\").pop();
+
+        $(".upload_name").val(file_name);
+
+        // 2. 평점
+        var rating = $("#bookrating").attr("value");
+        
+        $("input#bookrating-" + (rating - 1)).prop("checked", true);
+
+        // 3. 후기
+        var content = $("#book_content").attr("value");
+
+        $("#book_content").text(content)
+    })
+</script>
+{% endblock %}

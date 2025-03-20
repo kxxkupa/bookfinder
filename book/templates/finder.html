@@ -1,0 +1,87 @@
+{% extends "base_book.html" %}
+{% block title %}도서 검색{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('book.static', filename='css/swiper-bundle.min.css') }}">
+<script src="{{ url_for('book.static', filename='js/swiper-bundle.min.js') }}"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
+<div id="container">
+    <div class="search_box">
+        <input type="text">
+        <button type="button">검색</button>
+    </div>
+    <div id="book_finder" class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <div class="navigation">
+            <button type="button" class="navi_prev">
+                <img src="{{ url_for('book.static', filename='images/chevron_left.png') }}" alt="이전">
+            </button>
+            <button type="button" class="navi_next">
+                <img src="{{ url_for('book.static', filename='images/chevron_right.png') }}" alt="다음">
+            </button>
+        </div>
+    </div>
+</div>
+<img src="{{ url_for('book.static', filename='images/main_bg.png') }}" alt="배경 이미지" class="main_bg">
+<script>
+    // 검색한 책 보여주기 슬라이드
+    var book_finder = new Swiper('#book_finder', {
+        grabCursor: false,
+        touchRatio: 0,
+        slidesPerView: 2,
+        spaceBetween: 40,
+        speed: 700,
+        navigation: {
+            nextEl: '.navi_next',
+            prevEl: '.navi_prev',
+        }
+    });
+
+    // 책 검색
+    $(".search_box button").on("click", function(){
+        // 이전 검색 내용 전체 삭제
+        book_finder.removeAllSlides();
+
+        // 검색 내용
+        var title = $(".search_box input").val();
+
+        // 카카오 도서 검색 API를 활용하여 검색된 내용을 토대로 정보 호출
+        $.ajax({
+            method: "GET",
+            url: "https://dapi.kakao.com/v3/search/book",
+            headers: { Authorization: "KakaoAK de334a353b75e75e987835362ca536ee" },
+            data: {
+                query: title
+            }
+        })
+        .done(function(book){
+            for(var i=0; i < book.documents.length; i++){
+                var slide = "";
+                var book_url = book.documents[i].url
+                var book_thumbnail = book.documents[i].thumbnail
+                var book_title = book.documents[i].title
+                var book_authors = book.documents[i].authors
+                var book_publisher = book.documents[i].publisher
+                
+                if(!book_thumbnail){
+                    book_thumbnail = "/book/static/images/default_thumbnail.jpg"
+                }
+
+                slide += '<div class="swiper-slide">\n'
+                slide += '    <a href="' + book_url + '" target="_blank">\n'
+                slide += '        <div class="img_wrap">\n'
+                slide += '            <img src="' + book_thumbnail + '" alt="도서 이미지">\n'
+                slide += '        </div>\n'
+                slide += '        <div class="slide_info">\n'
+                slide += '            <p class="title">' + book_title + '</p>\n'
+                slide += '            <span class="author">저자 : ' + book_authors + '</span>\n'
+                slide += '            <span class="publisher">출판사 : ' + book_publisher + '</span>\n'
+                slide += '        </div>\n'
+                slide += '    </a>\n'
+                slide += '</div>'
+
+                book_finder.appendSlide(slide);
+            }
+        });
+    });
+</script>
+{% endblock %}

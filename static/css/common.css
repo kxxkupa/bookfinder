@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+@import "reset.css";
+
+/* btn */
+.btn_box {display: flex; gap: 20px; align-items: center; justify-content: space-between;}
+.btn_box > * {display: grid; place-items: center; height: 70px; font-size: 30px; font-weight: 500; color: #C3A788; white-space: nowrap; background: #F1E5D9; border: 1px solid #D8BFA4; border-radius: 10px; transition: all .35s; cursor: pointer;}
+.btn_box > *:hover {color: #FFFCF9; background: #D8BFA4;}
+.btn_box.type_02 > * {width: calc((100% - 20px) / 2);}
+.btn_box.type_03 > * {width: calc((100% - 20px) / 3);}

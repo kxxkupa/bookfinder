@@ -1,0 +1,23 @@
+{% extends "base_book.html" %}
+{% block title %}게시물 보기{% endblock %}
+{% block content %}
+<div id="container" class="board view">
+    <div class="view_box">
+        <div class="view_top">
+            <p class="title">{{ board.boardTitle }}</p>
+            <div class="rating">
+                <img src="{{ url_for('book.static', filename='images/icon_star_02.svg') }}" alt="별점">
+                <span>{{ board.boardRating }}</span>
+            </div>
+        </div>
+        <div class="view_bottom">{{ board.boardContent }}</div>
+    </div>
+    <div id="btn_wrap">
+        <div class="btn_box type_03">
+            <a href="{{ url_for('book.board_update', userId=g.user.userId, boardId=board.boardId)}}">수정</a>
+            <a href="{{ url_for('book.board_delete', userId=g.user.userId, boardId=board.boardId)}}">삭제</a>
+            <a href="{{ url_for('book.index', userId=g.user.userId) }}">목록</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+/* 로그인 후 화면 공통 헤더 */
+#header {display: flex; align-items: center; justify-content: space-between; height: 100px; background: #C3A788; padding: 0 70px;}
+#header .user_info {display: flex; gap: 30px; align-items: center;}
+#header .user_info > div,
+#header .user_info > a,
+#header .book_search {display: flex; gap: 10px; align-items: center;}
+#header .book_search,
+#header .user_info > a {position: relative; overflow: hidden; padding: 5px 0;}
+#header .book_search:after,
+#header .user_info > a:after {display: block; content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; transform: translate3d(-102%, 0, 0); background: #F4EBE1;}
+#header .book_search:hover:after,
+#header .user_info > a:hover:after {animation: underline 1s ease;}
+#header p {font-size: 24px; font-weight: 500; color: #F4EBE1;}
+
+/* 내가 작성한 글 목록 */
+#container {padding: 0 200px;}
+.main_bg {position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);}
+
+.board_top {display: flex; align-items: center; justify-content: space-between; padding: 0 20px; margin: 80px 0 20px;}
+.board_top p {font-size: 30px; font-weight: 500; color: #C3A788;} 
+.board_top a {display: flex; gap: 10px; position: relative; align-items: center; overflow: hidden; padding: 5px 0;}
+.board_top a:after {display: block; content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; transform: translate3d(-102%, 0, 0); background: #C3A788;}
+.board_top a:hover:after {animation: underline 1s ease;}
+
+#my_list {position: relative; overflow: hidden; padding: 20px 20px 70px;}
+#my_list .swiper-slide a {display: block; background: #FFF; box-shadow: 0 4px 20px rgba(0, 0, 0, .15); border-radius: 10px; padding: 20px 24px;}
+#my_list .swiper-slide .img_wrap {position: relative; height: 330px; border-radius: 10px; overflow: hidden; margin-bottom: 25px;}
+#my_list .swiper-slide .img_wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: initial; height: 100%;}
+#my_list .swiper-slide .slide_info {display: flex; gap: 14px; flex-direction: column;}
+#my_list .swiper-slide p {font-size: 20px; font-weight: 500; color: #252525;}
+#my_list .swiper-slide span,
+#my_list .swiper-slide strong {font-size: 16px; font-weight: 300; color: #252525;}
+#my_list .swiper-slide strong {display: flex; gap: 4px; align-items: center;}
+#my_list .navigation {display: flex; gap: 10px; position: absolute; bottom: 0; right: 20px; z-index: 1;}
+#my_list .navigation .swiper-button-disabled {opacity: .5; transition: all .35s;}
+
+/* 글쓰기 */
+.rating_radio {display: flex; gap: 15px; align-items: center;}
+.rating_radio li {display: flex; gap: 10px; align-items: center;}
+.rating_radio input[type="radio"] {display: block; width: 19px; aspect-ratio: 1; background: url(../images/radio_off.svg) center no-repeat;}
+.rating_radio input[type="radio"] + label {font-weight: 300; color: #DBCAB8;}
+.rating_radio input[type="radio"]:checked {background-image: url(../images/radio_on.svg);}
+.rating_radio input[type="radio"]:checked + label {color: #C3A788;}
+
+.upload_file {display: flex; gap: 10px; align-items: center;}
+.upload_file label {display: grid; place-items: center; font-size: 24px; font-weight: 400; color: #C3A788; white-space: nowrap; background: #F1E5D9; border: 1px solid #D8BFA4; border-radius: 50px; cursor: pointer; padding: 5px 10px;}
+.upload_file input {width: calc(100% - 188px); pointer-events: none;}
+.upload_file input::placeholder {font-size: 22px; font-weight: 400; color: #C3A788;}
+.upload_file input[type="file"] {display: none !important;}
+.upload_file .file_del {display: grid; place-items: center; width: 70px; height: 38px; color: #FFFCF9 !important; background: #C3A788; border-radius: 10px;}
+
+.board_write {border-top: 1px solid #C3A788; border-bottom: 1px solid #C3A788; margin-top: 80px;}
+.board_write .th {text-align: center; background: #C3A788; border-bottom: 1px solid #FFFCF9; padding: 24px 0;}
+.board_write .th * {font-size: 24px; font-weight: 500; color: #FFFCF9;}
+.board_write .td {border-bottom: 1px solid #C3A788; padding: 20px 25px;}
+.board_write .td * {font-size: 22px; font-weight: 400; color: #C3A788;}
+.board_write .td input,
+.board_write .td textarea {display: block; background-color: transparent; border: none; outline: none;}
+.board_write .td input[type="text"] {width: 100%; height: 32px;}
+.board_write .td textarea {width: 100%; height: 300px;}
+.board_write *::placeholder {font-size: 22px; font-weight: 400; color: #DBCAB8; opacity: .5;}
+
+.board.write #btn_wrap {display: flex; align-items: center; justify-content: flex-end; margin-top: 40px;}
+.board.write #btn_wrap .btn_box > * {font-size: 24px; height: 60px;}
+.board.write #btn_wrap .btn_box.type_02 > * {padding: 0 30px;}
+
+/* 게시물 보기 */
+.view_box {height: 576px; border-top: 1px solid #C3A788; border-bottom: 1px solid #C3A788; margin-top: 80px;}
+.view_box .view_top {display: flex; gap: 17px; align-items: center; height: 85px; background: #C3A788; padding: 23px 20px;}
+.view_box .view_top .title {font-size: 30px; font-weight: 400; color: #FFFCF9;}
+.view_box .view_top .rating {background: #FFFCF9; border-radius: 100px; padding: 3px 13px;}
+.view_box .view_bottom {height: calc(100% - 85px); font-size: 24px; font-weight: 400; color: #C3A788; overflow: hidden; overflow-y: scroll; padding: 25px 20px;}
+.view_box .view_bottom::-webkit-scrollbar {width: 3px;}
+.view_box .view_bottom::-webkit-scrollbar-thumb {width: 5px; height: 10px; background: #C3A788; border-radius: 50px;}
+
+.board.view #btn_wrap {display: flex; align-items: center; justify-content: flex-end; margin-top: 40px;}
+.board.view #btn_wrap .btn_box > * {font-size: 24px; height: 60px;}
+.board.view #btn_wrap .btn_box.type_03 > * {padding: 0 30px;}
+
+/* 책 검색 */
+.search_box {display: flex; gap: 20px; align-items: center; justify-content: center; margin: 80px 0 50px;}
+.search_box input {width: 600px; height: 60px; font-size: 30px; font-weight: 500; color: #C3A788; text-align: center; background: none; border: none; border-bottom: 2px solid #C3A788; outline: none;}
+.search_box button {display: grid; place-items: center; width: 100px; height: 60px; font-size: 30px; font-weight: 400; color: #FFFCF9; background: #C3A788; border-radius: 10px;}
+
+#book_finder {position: relative; width: 1000px; overflow: hidden; padding: 20px 20px 70px; margin: 0 auto;}
+#book_finder .swiper-slide a {display: flex; gap: 15px; background: #FFF; box-shadow: 0 4px 20px rgba(0, 0, 0, .15); border-radius: 10px; padding: 20px 24px;}
+#book_finder .swiper-slide .img_wrap {position: relative; width: 120px; height: 174px; border-radius: 10px; overflow: hidden;}
+#book_finder .swiper-slide .img_wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: initial; height: 100%; transition: transform .8s;}
+#book_finder .swiper-slide a:hover .img_wrap img {transform: translate(-50%, -50%) scale(1.1);}
+#book_finder .swiper-slide .slide_info {display: flex; gap: 8px; flex-direction: column;}
+#book_finder .swiper-slide p {display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; width: 277px; overflow: hidden; word-break: keep-all; font-size: 18px; font-weight: 500; color: #252525; margin-bottom: 8px;}
+#book_finder .swiper-slide span,
+#book_finder .swiper-slide strong {font-size: 16px; font-weight: 300; color: #252525;}
+#book_finder .swiper-slide strong {display: flex; gap: 4px; align-items: center;}
+#book_finder .navigation {display: flex; gap: 10px; position: absolute; bottom: 0; right: 20px; z-index: 1;}
+#book_finder .navigation .swiper-button-disabled {opacity: .5; transition: all .35s;}
+
+/* animation */
+@keyframes underline {
+    to {transform: translate3d(101%, 0, 0);}
+}

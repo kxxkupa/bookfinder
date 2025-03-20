@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+/* 로그인, 회원가입 배경 이미지 */
+.login_book {height: 100vh;}
+
+/* 로그인, 회원가입 폼 스타일 */
+#form {position: absolute; top: 50%; right: 10%; transform: translateY(-50%);}
+#form .title {font-size: 50px; font-weight: 500; color: #C3A788; text-align: center; margin-bottom: 63px;}
+#form .input_wrap {display: flex; gap: 48px; flex-direction: column; margin-bottom: 100px;}
+#form .input_box label,
+#form .input_box input,
+#form .input_box input::placeholder {font-weight: 400; color: #C3A788;}
+#form .input_box input::placeholder {font-size: inherit; font-weight: 400; opacity: .4;}
+#form .input_box label {font-weight: 500;}
+#form .input_box input {height: 100%; background: transparent; border: none; outline: none; appearance: none;}
+
+#form.login .input_box {position: relative; width: 550px; height: 70px; border-bottom: 2px solid #D8BFA4;}
+#form.login .input_box label,
+#form.login .input_box input {font-size: 30px;}
+#form.login .input_box label {position: absolute; top: 50%; left: 0; transform: translateY(-50%); transition: all .35s;}
+#form.login .input_box label.on {top: 0; font-size: 18px;}
+#form.login .input_box input {position: absolute; top: 0; left: 0; width: 100%; padding: 20px 0 10px;}
+
+#form.signup .input_box {display: flex; gap: 20px; align-items: center; height: 60px;}
+#form.signup .input_box label,
+#form.signup .input_box input {font-size: 25px;}
+#form.signup .input_box label {display: block; width: 104px; font-weight: 500;}
+#form.signup .input_box input {width: 426px; border-bottom: 2px solid #D8BFA4; padding: 10px 0;}
+#form.signup .input_box input::-webkit-outer-spin-button,
+#form.signup .input_box input::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}
+#form.signup .input_box input[type="number"] {-moz-appearance: textfield;}

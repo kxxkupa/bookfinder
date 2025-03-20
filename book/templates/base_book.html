@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('book.static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>    
+</head>
+<body>
+    {% if g.user %}
+    <div id="header">
+        <div class="user_info">
+            <a href="{{ url_for('book.index', userId=g.user.userId) }}">
+                <img src="{{ url_for('book.static', filename='images/icon_user.svg')}}" alt="유저">
+                <p>{{ g.user.userName }}</p>
+            </a>
+            <a href="{{ url_for('auth.logout') }}">
+                <img src="{{ url_for('book.static', filename='images/icon_logout.svg')}}" alt="로그아웃">
+                <p>로그아웃</p>
+            </a>
+        </div>
+        {% if page != "bookfinder" %}
+        <a href="{{ url_for('book.book_finder') }}" class="book_search">
+            <img src="{{ url_for('book.static', filename='images/icon_book.svg')}}" alt="책">
+            <p>책 검색</p>
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>
